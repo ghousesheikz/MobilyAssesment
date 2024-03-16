@@ -49,6 +49,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import coil.compose.rememberImagePainter
@@ -139,6 +140,8 @@ fun BugSubmissionScreen(viewModel: ImageViewModel, intentUri: Uri?) {
                     }
                     Spacer(modifier = Modifier.width(30.dp))
                     Button(
+                        modifier = Modifier
+                            .size(width = 80.dp, height = 40.dp),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xFF006DFF), // Background color of the button
                             contentColor = Color.White // Color of the text and icon inside the button
