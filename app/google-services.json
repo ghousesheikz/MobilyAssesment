@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "374968441789",
+    "project_id": "bugit-3fc98",
+    "storage_bucket": "bugit-3fc98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374968441789:android:f703c5a840d17c2d2550d4",
+        "android_client_info": {
+          "package_name": "com.mobily"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqinUMfAiHNCqdPdot6uHuzIhaNf8Ee8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
