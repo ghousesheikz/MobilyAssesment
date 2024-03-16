@@ -3,4 +3,5 @@
     <string name="description">Description</string>
     <string name="upload_screenshot">Upload Image</string>
     <string name="save">Save</string>
+    <string name="data_uploaded_successfully">Data Uploaded Successfully</string>
 </resources>

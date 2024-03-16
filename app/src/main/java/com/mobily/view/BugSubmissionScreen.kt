@@ -24,6 +24,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -68,6 +69,7 @@ fun BugSubmissionScreen(viewModel: ImageViewModel, intentUri: Uri?) {
     val showDialog = remember { mutableStateOf(false) }
     val uploadImage = remember { mutableStateOf(false) }
     val uploadData = remember { mutableStateOf(false) }
+    val showProgress = remember { mutableStateOf(false) }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
     val view = LocalView.current
     val imagePickerLauncher = rememberLauncherForActivityResult(
@@ -78,7 +80,7 @@ fun BugSubmissionScreen(viewModel: ImageViewModel, intentUri: Uri?) {
     )
     val context = LocalContext.current.applicationContext
     LaunchedEffect(key1 = true) {
-        if(intentUri!=null) imageUri = intentUri
+        if (intentUri != null) imageUri = intentUri
     }
     Scaffold(
         topBar = {
@@ -144,6 +146,7 @@ fun BugSubmissionScreen(viewModel: ImageViewModel, intentUri: Uri?) {
                         onClick = {
                             if (imageUri != null) {
                                 uploadImage.value = true
+                                showProgress.value = true
                                 viewModel.uploadImage(imageUri)
                             }
                         }) {
@@ -163,6 +166,13 @@ fun BugSubmissionScreen(viewModel: ImageViewModel, intentUri: Uri?) {
                     painter = painterResource(id = R.drawable.ic_icon_excel),
                     contentDescription = "Add",
                     tint = Color.White
+                )
+            }
+            if (showProgress.value) {
+                CircularProgressIndicator(
+                    color = Color(0xFF006DFF),
+                    modifier = Modifier
+                        .align(Alignment.Center)
                 )
             }
         }
@@ -220,6 +230,7 @@ fun BugSubmissionScreen(viewModel: ImageViewModel, intentUri: Uri?) {
     if (uploadImage.value) {
         uploadImage.value = false
         imageResponseData?.success?.let {
+            showProgress.value = false
             CoroutineScope(Dispatchers.IO).launch {
                 if (viewModel.insertDatabase(
                         BugReport(
@@ -237,7 +248,11 @@ fun BugSubmissionScreen(viewModel: ImageViewModel, intentUri: Uri?) {
                 }
             }
         }
-
+        imageResponseData?.error?.let {
+            showProgress.value = false
+            Toast.makeText(context, it, Toast.LENGTH_LONG)
+                .show()
+        }
     }
     if (uploadData.value) {
         uploadData.value = false
@@ -249,7 +264,7 @@ fun BugSubmissionScreen(viewModel: ImageViewModel, intentUri: Uri?) {
                         CoroutineScope(Dispatchers.Main).launch {
                             Toast.makeText(
                                 context,
-                                "Data Uploaded Successfully",
+                                context.getString(R.string.data_uploaded_successfully),
                                 Toast.LENGTH_LONG
                             ).show()
                         }

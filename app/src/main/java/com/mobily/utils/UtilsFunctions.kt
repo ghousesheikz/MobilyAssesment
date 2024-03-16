@@ -72,7 +72,6 @@ fun saveBitmapToFile(context: Context, bitmap: Bitmap, fileName: String): Uri? {
             e.printStackTrace()
         }
     }
-    // Return a Uri that points to the file
     return FileProvider.getUriForFile(context, "${context.packageName}.provider", imageFile)
 }
 
@@ -112,7 +111,7 @@ suspend fun appendData(
 ) {
     withContext(Dispatchers.IO) {
         val body = ValueRange().setValues(data)
-        val result = service?.spreadsheets()?.values()
+        service?.spreadsheets()?.values()
             ?.append(spreadsheetId, range, body)
             ?.setValueInputOption("RAW")
             ?.execute()
