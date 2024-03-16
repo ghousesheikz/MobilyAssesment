@@ -228,9 +228,9 @@ fun BugSubmissionScreen(viewModel: ImageViewModel, intentUri: Uri?) {
         }
     }
     if (uploadImage.value) {
-        uploadImage.value = false
         imageResponseData?.success?.let {
             showProgress.value = false
+            uploadImage.value = false
             CoroutineScope(Dispatchers.IO).launch {
                 if (viewModel.insertDatabase(
                         BugReport(
@@ -242,7 +242,8 @@ fun BugSubmissionScreen(viewModel: ImageViewModel, intentUri: Uri?) {
                     withContext(Dispatchers.Main) {
                         description = ""
                         imageUri = null
-                        Toast.makeText(context, "Data Inserted Successfully", Toast.LENGTH_LONG)
+                        Toast.makeText(context,
+                            context.getString(R.string.data_inserted_successfully), Toast.LENGTH_LONG)
                             .show()
                     }
                 }
@@ -250,6 +251,7 @@ fun BugSubmissionScreen(viewModel: ImageViewModel, intentUri: Uri?) {
         }
         imageResponseData?.error?.let {
             showProgress.value = false
+            uploadImage.value = false
             Toast.makeText(context, it, Toast.LENGTH_LONG)
                 .show()
         }
