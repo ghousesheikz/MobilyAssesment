@@ -21,7 +21,9 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-
+/*
+* This method will convert view to the bitmap
+*/
 fun takeScreenshot(view: View): Bitmap? {
     return try {
         val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
@@ -33,6 +35,9 @@ fun takeScreenshot(view: View): Bitmap? {
     }
 }
 
+/*
+* This method will take input as view and return the URI of the file path
+*/
 fun getUriFromView(view: View, context: Context):Uri? {
     val filename = "${System.currentTimeMillis()}_image"
     return try {
@@ -43,6 +48,9 @@ fun getUriFromView(view: View, context: Context):Uri? {
     }
 }
 
+/*
+* This method will convert hardware bitmap to software bitmap
+*/
 fun Bitmap.toSoftwareBitmap(): Bitmap? {
     return try {
         val softwareBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
@@ -54,6 +62,9 @@ fun Bitmap.toSoftwareBitmap(): Bitmap? {
     }
 }
 
+/*
+* This method will save bitmap to file and saves locally
+*/
 fun saveBitmapToFile(context: Context, bitmap: Bitmap, fileName: String): Uri? {
     // Get the directory for the app's private pictures directory.
     val directory = context.getExternalFilesDir(null)
@@ -75,12 +86,18 @@ fun saveBitmapToFile(context: Context, bitmap: Bitmap, fileName: String): Uri? {
     return FileProvider.getUriForFile(context, "${context.packageName}.provider", imageFile)
 }
 
+/*
+* This method will return the current date for the sheet name
+*/
 fun getSheetDate(): String {
     val currentDate = Date()
     val dateFormat = SimpleDateFormat("dd-MM-yy", Locale.getDefault())
     return dateFormat.format(currentDate)
 }
 
+/*
+* This method will return the sheet exists or not
+*/
 fun ensureSheetExists(
     service: Sheets,
     spreadsheetId: String,
@@ -103,6 +120,9 @@ fun ensureSheetExists(
     }
 }
 
+/*
+* This method will append data to sheet
+*/
 suspend fun appendData(
     service: Sheets?,
     spreadsheetId: String,
@@ -113,7 +133,7 @@ suspend fun appendData(
         val body = ValueRange().setValues(data)
         service?.spreadsheets()?.values()
             ?.append(spreadsheetId, range, body)
-            ?.setValueInputOption("RAW")
+            ?.setValueInputOption(RAW)
             ?.execute()
     }
 }

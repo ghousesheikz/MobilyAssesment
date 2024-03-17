@@ -49,7 +49,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import coil.compose.rememberImagePainter
@@ -245,8 +244,11 @@ fun BugSubmissionScreen(viewModel: ImageViewModel, intentUri: Uri?) {
                     withContext(Dispatchers.Main) {
                         description = ""
                         imageUri = null
-                        Toast.makeText(context,
-                            context.getString(R.string.data_inserted_successfully), Toast.LENGTH_LONG)
+                        Toast.makeText(
+                            context,
+                            context.getString(R.string.data_inserted_successfully),
+                            Toast.LENGTH_LONG
+                        )
                             .show()
                     }
                 }

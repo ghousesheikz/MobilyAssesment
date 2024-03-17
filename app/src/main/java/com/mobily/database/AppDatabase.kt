@@ -4,8 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.mobily.utils.DATABASE_NAME
 
 
+/*
+* This class will create the Room database
+*/
 @Database(entities = [BugReport::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun bugReportDao(): BugReportDao
@@ -19,7 +23,7 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "bug_database"
+                    DATABASE_NAME
                 ).build()
                 INSTANCE = instance
                 instance

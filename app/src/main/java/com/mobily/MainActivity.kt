@@ -43,7 +43,8 @@ class MainActivity : ComponentActivity() {
 
 }
 
-//https://docs.google.com/spreadsheets/d/1ygyuPDkjcyo6cWDwfd10uesJRkw07ek0FFColmU5twU/edit#gid=1641608672
+// Spread sheet where bug data is stored.
+// https://docs.google.com/spreadsheets/d/1ygyuPDkjcyo6cWDwfd10uesJRkw07ek0FFColmU5twU/edit#gid=1641608672
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {

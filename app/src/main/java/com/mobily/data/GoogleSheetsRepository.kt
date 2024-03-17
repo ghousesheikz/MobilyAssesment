@@ -18,6 +18,9 @@ import kotlinx.coroutines.launch
 
 class GoogleSheetsRepository {
 
+    /*
+    * This method will upload data to the spread sheets
+    * */
     fun uploadDataGoogleSheets(
         application: Application?,
         bugdata: List<BugReport>,

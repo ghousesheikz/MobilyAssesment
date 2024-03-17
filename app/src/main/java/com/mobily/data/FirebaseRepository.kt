@@ -5,6 +5,9 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
 class FirebaseRepository {
+    /*
+    * This method will upload image to firebase
+    * */
     fun uploadImage(imageUri: Uri?, success: (String) -> Unit, error: (String) -> Unit) {
         if (imageUri != null) {
             val fileReference = "images/${imageUri.lastPathSegment}.jpg"
